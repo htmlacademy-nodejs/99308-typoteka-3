@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nzvyagin/99308-typoteka-3/issues"
   },
-  "homepage": "https://github.com/nzvyagin/99308-typoteka-3#readme"
+  "homepage": "https://github.com/nzvyagin/99308-typoteka-3#readme",
+  "devDependencies": {
+    "eslint": "7.20.0"
+  }
 }
