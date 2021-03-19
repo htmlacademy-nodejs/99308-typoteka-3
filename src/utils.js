@@ -14,4 +14,11 @@ const shuffle = (someArray) => {
   return someArray;
 };
 
-module.exports = {getRandomInt, shuffle};
+const getRandomDate = () => {
+  const currentTime = Date.now();
+  const startTime = currentTime - (30 * 24 * 60 * 60 * 1000) * 3;
+  const offset = currentTime - startTime;
+  return new Date(startTime + Math.random() * offset);
+};
+
+module.exports = {getRandomInt, shuffle, getRandomDate};
