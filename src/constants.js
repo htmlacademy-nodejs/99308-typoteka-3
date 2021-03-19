@@ -3,6 +3,7 @@
 const DEFAULT_COUNT = 1;
 const MAX_POSTS = 1000;
 const FILE_NAME = `../../mocks.json`;
+const USER_ARGV_INDEX = 2;
 
 const TITLES = [
   `Ёлки. История деревьев`,
@@ -66,5 +67,6 @@ module.exports = {
   DEFAULT_COUNT,
   MAX_POSTS,
   FILE_NAME,
+  USER_ARGV_INDEX,
   ExitCode
 };
