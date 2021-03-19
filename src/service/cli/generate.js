@@ -1,6 +1,15 @@
 'use strict';
 
-const {TITLES, SENTENCES, CATEGORIES, DEFAULT_COUNT, MAX_POSTS, FILE_NAME, ExitCode} = require(`../../constants`);
+const {
+  TITLES,
+  SENTENCES,
+  CATEGORIES,
+  DEFAULT_COUNT,
+  MAX_POSTS,
+  FILE_NAME,
+  ExitCode
+} = require(`../../constants`);
+
 const fs = require(`fs`);
 const {getRandomInt, shuffle, getRandomDate} = require(`../../utils`);
 
