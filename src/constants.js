@@ -1,5 +1,9 @@
 'use strict';
 
+const DEFAULT_COUNT = 1;
+const MAX_POSTS = 1000;
+const FILE_NAME = `../../mocks.json`;
+
 const TITLES = [
   `Ёлки. История деревьев`,
   `Как перестать беспокоиться и начать жить`,
@@ -50,8 +54,17 @@ const CATEGORIES = [
   `Железо`
 ];
 
+const ExitCode = {
+  SUCCESS: 0,
+  ERROR: 1
+};
+
 module.exports = {
   TITLES,
   SENTENCES,
-  CATEGORIES
+  CATEGORIES,
+  DEFAULT_COUNT,
+  MAX_POSTS,
+  FILE_NAME,
+  ExitCode
 };
