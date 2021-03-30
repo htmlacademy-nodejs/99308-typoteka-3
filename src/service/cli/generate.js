@@ -11,6 +11,7 @@ const {
 } = require(`../../constants`);
 
 const fs = require(`fs`);
+const chalk = require(`chalk`);
 const {getRandomInt, shuffle, getRandomDate} = require(`../../utils`);
 
 const generatePosts = (count) => (
@@ -29,16 +30,16 @@ module.exports = {
     const [count] = args;
     const countPost = Number.parseInt(count, 10) || DEFAULT_COUNT;
     if (countPost > MAX_POSTS) {
-      console.log(`Не больше ${MAX_POSTS} публикаций!`);
+      console.error(chalk.red(`Не больше ${MAX_POSTS} публикаций!`));
       process.exit(ExitCode.ERROR);
     }
     const content = JSON.stringify(generatePosts(countPost));
     fs.writeFile(FILE_NAME, content, (err) => {
       if (err) {
-        console.log(`Can't write data to file...`);
+        console.error(chalk.red(`Can't write data to file...`));
         process.exit(ExitCode.ERROR);
       }
-      console.info(`Operation success. File created.`);
+      console.info(chalk.green(`Operation success. File created.`));
     });
   }
 };
