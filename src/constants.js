@@ -2,7 +2,7 @@
 
 const DEFAULT_COUNT = 1;
 const MAX_POSTS = 1000;
-const FILE_NAME = `../../mocks.json`;
+const FILE_NAME = `mocks.json`;
 const USER_ARGV_INDEX = 2;
 const DEFAULT_COMMAND = `--help`;
 
