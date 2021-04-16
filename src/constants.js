@@ -15,6 +15,11 @@ const ExitCode = {
   ERROR: 1
 };
 
+const HttpCode = {
+  OK: 200,
+  NOT_FOUND: 404
+};
+
 module.exports = {
   TITLES_FILE_PATH,
   SENTENCES_FILE_PATH,
@@ -24,5 +29,6 @@ module.exports = {
   FILE_NAME,
   USER_ARGV_INDEX,
   DEFAULT_COMMAND,
-  ExitCode
+  ExitCode,
+  HttpCode
 };
