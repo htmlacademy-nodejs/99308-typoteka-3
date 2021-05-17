@@ -1,6 +1,7 @@
 'use strict';
 
-const http = require(`http`);
+const express = require(`express`);
+const {Router} = require(`express`);
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
 const {HttpCode} = require(`../../constants`);
@@ -8,46 +9,28 @@ const {HttpCode} = require(`../../constants`);
 const DEFAULT_PORT = 3000;
 const FILE = `./mocks.json`;
 
-const sendResponse = (res, statusCode, message) => {
-  const template = `
-    <!Doctype html>
-    <html>
-      <head>
-        <title>Local Server</title>
-      </head>
-      <body>${message}</body>
-    </html>
-  `.trim();
-  res.writeHead(statusCode, {
-    'Content-Type': `text/html; charset=UTF-8`
-  });
-  res.end(template);
-};
+const app = express();
+const postsRouter = new Router();
 
-const onClientConnect = async (req, res) => {
-  const notFoundMessageText = `Not found`;
-  if (req.url === `/`) {
-    try {
-      const fileContent = await fs.readFile(FILE);
-      const mocks = JSON.parse(fileContent);
-      const message = mocks.map((post) => {
-        return `<li>${post.title}</li>`;
-      }).join(``);
-      sendResponse(res, HttpCode.OK, `<ul>${message}</ul>`);
-    } catch (err) {
-      sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
-    }
-  } else {
-    sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
+app.use(express.json());
+
+postsRouter.get(`/`, async (req, res) => {
+  try {
+    const fileContent = await fs.readFile(FILE);
+    const mocks = JSON.parse(fileContent);
+    res.json(mocks);
+  } catch (err) {
+    console.error(chalk.red(err));
+    res.json([]);
   }
-};
+});
 
 module.exports = {
   name: `--server`,
   async run(args) {
     const [customPort] = args;
     const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
-    http.createServer(onClientConnect)
+    app
       .listen(port)
       .on(`listening`, () => {
         return console.info(
@@ -57,5 +40,9 @@ module.exports = {
       .on(`error`, (err) => {
         return console.error(chalk.red(`Create server error`, err));
       });
+    app.use(`/posts`, postsRouter);
+    app.use((req, res) => {
+      res.status(HttpCode.NOT_FOUND).send(`Not found`);
+    });
   }
 };
