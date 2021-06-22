@@ -25,6 +25,8 @@ const HttpCode = {
 
 const MAX_ID_LENGTH = 6;
 
+const API_PREFIX = `/api`;
+
 module.exports = {
   TITLES_FILE_PATH,
   SENTENCES_FILE_PATH,
@@ -37,6 +39,7 @@ module.exports = {
   USER_ARGV_INDEX,
   DEFAULT_COMMAND,
   MAX_ID_LENGTH,
+  API_PREFIX,
   ExitCode,
   HttpCode
 };

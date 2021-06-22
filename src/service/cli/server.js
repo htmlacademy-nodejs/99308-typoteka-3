@@ -1,28 +1,20 @@
 'use strict';
 
 const express = require(`express`);
-const {Router} = require(`express`);
-const fs = require(`fs`).promises;
+const routes = require(`../api`);
 const chalk = require(`chalk`);
-const {HttpCode} = require(`../../constants`);
+const {HttpCode, API_PREFIX} = require(`../../constants`);
 
 const DEFAULT_PORT = 3000;
-const FILE = `./mocks.json`;
 
 const app = express();
-const postsRouter = new Router();
 
 app.use(express.json());
 
-postsRouter.get(`/`, async (req, res) => {
-  try {
-    const fileContent = await fs.readFile(FILE);
-    const mocks = JSON.parse(fileContent);
-    res.json(mocks);
-  } catch (err) {
-    console.error(chalk.red(err));
-    res.json([]);
-  }
+app.use(API_PREFIX, routes);
+
+app.use((req, res) => {
+  res.status(HttpCode.NOT_FOUND).send(`Not found`);
 });
 
 module.exports = {
@@ -40,9 +32,5 @@ module.exports = {
       .on(`error`, (err) => {
         return console.error(chalk.red(`Create server error`, err));
       });
-    app.use(`/posts`, postsRouter);
-    app.use((req, res) => {
-      res.status(HttpCode.NOT_FOUND).send(`Not found`);
-    });
   }
 };
