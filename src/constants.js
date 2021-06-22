@@ -21,6 +21,8 @@ const HttpCode = {
   INTERNAL_SERVER_ERROR: 500
 };
 
+const MAX_ID_LENGTH = 6;
+
 module.exports = {
   TITLES_FILE_PATH,
   SENTENCES_FILE_PATH,
@@ -30,6 +32,7 @@ module.exports = {
   FILE_NAME,
   USER_ARGV_INDEX,
   DEFAULT_COMMAND,
+  MAX_ID_LENGTH,
   ExitCode,
   HttpCode
 };

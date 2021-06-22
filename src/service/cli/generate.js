@@ -7,10 +7,12 @@ const {
   DEFAULT_COUNT,
   MAX_POSTS,
   FILE_NAME,
+  MAX_ID_LENGTH,
   ExitCode
 } = require(`../../constants`);
 
 const fs = require(`fs`).promises;
+const {nanoid} = require(`nanoid`);
 const chalk = require(`chalk`);
 const {getRandomInt, shuffle, getRandomDate} = require(`../../utils`);
 
@@ -26,6 +28,7 @@ const readContent = async (filePath) => {
 
 const generatePosts = (count, titles, sentences, categories) => (
   Array(count).fill({}).map(() => ({
+    id: nanoid(MAX_ID_LENGTH),
     title: titles[getRandomInt(0, titles.length - 1)],
     announce: shuffle(sentences).slice(0, getRandomInt(1, 4)).join(` `),
     fullText: shuffle(sentences).slice(0, getRandomInt(4, sentences.length - 1)).join(` `),
