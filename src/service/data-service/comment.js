@@ -8,12 +8,12 @@ class CommentService {
     this._articles = articles;
   }
 
-  create(articleId, comment) {
+  async create(articleId, comment) {
     const newComment = {
       id: nanoid(MAX_ID_LENGTH),
       text: comment
     };
-    const currentArticle = this._articles.filter(
+    const currentArticle = this._articles.find(
         (item) => item.id === articleId
     );
     currentArticle.comments.push(newComment);
@@ -21,10 +21,10 @@ class CommentService {
   }
 
   async drop(articleId, commentId) {
-    const currentArticle = this._articles.filter(
+    const currentArticle = this._articles.find(
         (item) => item.id === articleId
     );
-    const comment = currentArticle.comments.filter(
+    const comment = currentArticle.comments.find(
         (item) => item.id === commentId
     );
     currentArticle.comments = currentArticle.comments.filter(
@@ -33,8 +33,8 @@ class CommentService {
     return comment;
   }
 
-  findAll(articleId) {
-    const currentArticle = this._articles.filter(
+  async findAll(articleId) {
+    const currentArticle = this._articles.find(
         (item) => item.id === articleId
     );
     return currentArticle.comments;

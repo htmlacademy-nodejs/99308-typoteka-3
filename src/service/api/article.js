@@ -40,7 +40,7 @@ module.exports = (app, articleService, commentService) => {
         .send(`Not found with ${articleId}`);
     }
     return res.status(HttpCode.OK)
-      .send(`Updated`);
+      .send(updated);
   });
 
   route.delete(`/:articleId`, async (req, res) => {
