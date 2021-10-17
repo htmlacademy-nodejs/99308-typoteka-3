@@ -29,6 +29,11 @@ const MAX_ID_LENGTH = 6;
 
 const API_PREFIX = `/api`;
 
+const Env = {
+  DEVELOPMENT: `development`,
+  PRODUCTION: `production`
+};
+
 module.exports = {
   TITLES_FILE_PATH,
   SENTENCES_FILE_PATH,
@@ -43,5 +48,6 @@ module.exports = {
   MAX_ID_LENGTH,
   API_PREFIX,
   ExitCode,
-  HttpCode
+  HttpCode,
+  Env
 };
